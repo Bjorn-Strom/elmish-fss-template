@@ -7,7 +7,7 @@ A simple F# elmish template with:
 - Fss
 - Elmish
 
-- How to run:
+## How to run:
 ```
 dotnet tool restore
 paket install
