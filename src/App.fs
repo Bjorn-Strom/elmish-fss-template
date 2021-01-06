@@ -54,12 +54,7 @@ module App =
                 MarginRight' (px 25)
                 Width' (px 400)
             ]
-    let header =
-        fss
-            [
-                textFont
-                Color' blue
-            ]
+    let header = fss [ Color' blue ]
     let todoStyle =
         let fadeInAnimation =
             keyframes
