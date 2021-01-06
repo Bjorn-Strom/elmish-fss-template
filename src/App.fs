@@ -1,4 +1,4 @@
-﻿namespace App
+﻿namespace Docs
 
 // Copy of the reactjs.org todo list.
 
@@ -13,16 +13,8 @@ module App =
     let blue = CSSColor.Hex "0d6efd"
     let darkBlue = CSSColor.Hex "01398D"
 
-    // Fonts
+    // Font
     let textFont = FontFamily.Custom "Roboto"
-
-    let formStyle =
-        [
-            Display.InlineBlock
-            Padding.Value(px 10, px 15)
-            FontSize' (px 18);
-            BorderRadius' (px 0)
-        ]
     let container =
         fss
             [
@@ -31,6 +23,44 @@ module App =
                 Padding.Value(rem 0., rem 1.5)
                 textFont
             ]
+    let header = fss [ Color' blue ]
+    let todoStyle =
+        let fadeInAnimation =
+            keyframes
+                [
+                    frame 0 
+                        [
+                            Opacity' 0.
+                            Transform.TranslateY(px 20)
+                        ]
+                    frame 100 
+                        [
+                            Opacity' 1.
+                            Transform.TranslateY(px 0)
+                        ]
+                ]
+        let indexCounter = counterStyle []
+        fss
+            [
+                CounterIncrement' indexCounter
+                FontSize' (px 20)
+                AnimationName' fadeInAnimation
+                AnimationDuration' (sec 0.4)
+                AnimationTimingFunction.Ease
+                ListStyleType.None
+                Before
+                    [
+                        Color.Hex "48f"
+                        Content.Counter(indexCounter,". ")
+                    ]
+            ]
+    let formStyle =
+        [
+            Display.InlineBlock
+            Padding.Value(px 10, px 15)
+            FontSize' (px 18);
+            BorderRadius' (px 0)
+        ]
     let buttonStyle =
         fss
             [
@@ -53,38 +83,6 @@ module App =
                 BorderWidth.Thin
                 MarginRight' (px 25)
                 Width' (px 400)
-            ]
-    let header = fss [ Color' blue ]
-    let todoStyle =
-        let fadeInAnimation =
-            keyframes
-                [
-                    frame 0 
-                        [
-                            Opacity' 0.
-                            Transform.TranslateY(px 20)
-                        ]
-                    frame 100 
-                        [
-                            Opacity' 1.
-                            Transform.TranslateY(px 0)
-                        ]
-                ]
-        let indexCounter = counterStyle []
-        fss
-            [
-                CounterIncrement' indexCounter
-                MarginTop' (px 1)
-                Width.MaxContent
-                FontSize' (px 20);
-                AnimationName' fadeInAnimation
-                AnimationDuration' (sec 0.4)
-                AnimationTimingFunction.Ease
-                Before
-                    [
-                        Color.Hex "48f"
-                        Content.Counter(indexCounter,". ")
-                    ]
             ]
 
     type Model = {
@@ -113,7 +111,7 @@ module App =
         div [ ClassName container ]
             [
                 h2 [ ClassName header ] [ str "TODO" ]
-                ul [] <| (model.Todos |> List.map (fun todo -> li [ ClassName todoStyle ] [ str todo ]))
+                ul [] <| List.map (fun todo -> li [ ClassName todoStyle] [ str todo ]) model.Todos
                 div []
                     [
                         input
