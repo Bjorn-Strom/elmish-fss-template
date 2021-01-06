@@ -7,6 +7,9 @@ A simple F# elmish template with:
 - Fss
 - Elmish
 
+This template implements the basic todo sample from https://reactjs.org/.
+A simple styling branch on branch `styling`
+
 ## How to run:
 ```
 dotnet tool restore
