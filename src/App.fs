@@ -31,12 +31,12 @@ module App =
                     frame 0 
                         [
                             Opacity' 0.
-                            Transform.TranslateY <| px 20
+                            Transforms [ Transform.TranslateY <| px 20 ]
                         ]
                     frame 100 
                         [
                             Opacity' 1.
-                            Transform.TranslateY <| px 0
+                            Transforms [ Transform.TranslateY <| px 0 ]
                         ]
                 ]
         let indexCounter = counterStyle []
