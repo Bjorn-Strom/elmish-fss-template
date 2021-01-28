@@ -13,7 +13,7 @@ A simple styling branch on branch `styling`
 ## How to run:
 ```
 dotnet tool restore
-paket install
+dotnet paket install
 npm install
 npm start
 ```

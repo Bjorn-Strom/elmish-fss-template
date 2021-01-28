@@ -31,7 +31,7 @@ NUGET
       Fable.Core (>= 3.1.5) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.7.2) - restriction: >= netstandard2.0
     FSharp.Core (5.0)
-    Fss-lib (1.1)
+    Fss-lib (1.1.2)
       Fable.Core (>= 3.2.2) - restriction: >= netstandard2.0
       Fable.Elmish.React (>= 3.0.1) - restriction: >= netstandard2.0
       Fable.React (>= 7.2) - restriction: >= netstandard2.0
