@@ -10,17 +10,17 @@ module App =
     open Fss
 
     // Colors
-    let blue = CssColor.Hex "0d6efd"
-    let darkBlue = CssColor.Hex "01398D"
+    let blue = FssTypes.Color.hex "0d6efd"
+    let darkBlue = FssTypes.Color.hex "01398D"
 
     // Font
-    let textFont = FontFamily.Custom "Roboto"
+    let textFont = FontFamily.custom "Roboto"
     let container =
         fss
             [
-                Display.Flex
-                FlexDirection.Column
-                Padding.Value(rem 0., rem 1.5)
+                Display.flex
+                FlexDirection.column
+                Padding.value(rem 0., rem 1.5)
                 textFont
             ]
     let header = fss [ Color' blue ]
@@ -28,15 +28,15 @@ module App =
         let fadeInAnimation =
             keyframes
                 [
-                    frame 0 
+                    frame 0
                         [
                             Opacity' 0.
-                            Transforms [ Transform.TranslateY <| px 20 ]
+                            Transforms [ Transform.translateY <| px 20 ]
                         ]
-                    frame 100 
+                    frame 100
                         [
                             Opacity' 1.
-                            Transforms [ Transform.TranslateY <| px 0 ]
+                            Transforms [ Transform.translateY <| px 0 ]
                         ]
                 ]
         let indexCounter = counterStyle []
@@ -46,18 +46,18 @@ module App =
                 FontSize' (px 20)
                 AnimationName' fadeInAnimation
                 AnimationDuration' (sec 0.4)
-                AnimationTimingFunction.Ease
-                ListStyleType.None
+                AnimationTimingFunction.ease
+                ListStyleType.none
                 Before
                     [
-                        Color.Hex "48f"
-                        Content.Counter(indexCounter,". ")
+                        Color.hex "48f"
+                        Content.counter(indexCounter,". ")
                     ]
             ]
     let formStyle =
         [
-            Display.InlineBlock
-            Padding.Value(px 10, px 15)
+            Display.inlineBlock
+            Padding.value(px 10, px 15)
             FontSize' (px 18);
             BorderRadius' (px 0)
         ]
@@ -65,13 +65,13 @@ module App =
         fss
             [
                 yield! formStyle
-                Border.None
+                Border.none
                 BackgroundColor' blue
                 Color.white
                 Width' (em 10.)
                 Hover
                     [
-                        Cursor.Pointer
+                        Cursor.pointer
                         BackgroundColor' darkBlue
                     ]
             ]
@@ -80,7 +80,7 @@ module App =
             [
                 yield! formStyle
                 BorderRadius' (px 0)
-                BorderWidth.Thin
+                BorderWidth.thin
                 MarginRight' (px 25)
                 Width' (px 400)
             ]

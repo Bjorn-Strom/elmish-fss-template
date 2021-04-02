@@ -3,5 +3,5 @@ nuget FSharp.Core
 nuget Fable.Core
 nuget Fable.Elmish.React
 nuget Fable.React
-nuget Fss-lib
+nuget Fss-lib 1.1.5
 
