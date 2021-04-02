@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "start": "dotnet fable watch ./src -o ./public --run parcel public/index.html",
-        "build": "dotnet fable ./docs -o ./public --run parcel build public/index.html --public-url .",
+        "build": "dotnet fable ./src -o ./public --run parcel build public/index.html --no-source-maps --public-url .",
         "clean": "rm -rf dist && rm -rf public/*.js "
     },
     "devDependencies": {
