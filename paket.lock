@@ -20,7 +20,7 @@ NUGET
       Fable.Browser.Event (>= 1.0) - restriction: >= netstandard2.0
       Fable.Core (>= 3.0) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.5.2) - restriction: >= netstandard2.0
-    Fable.Core (3.2.5)
+    Fable.Core (3.2.6)
       FSharp.Core (>= 4.7.2) - restriction: >= netstandard2.0
     Fable.Elmish (3.1) - restriction: >= netstandard2.0
       Fable.Core (>= 3.0) - restriction: >= netstandard2.0
@@ -35,7 +35,7 @@ NUGET
       Fable.Core (>= 3.1.5) - restriction: >= netstandard2.0
       FSharp.Core (>= 5.0) - restriction: >= netstandard2.0
     FSharp.Core (5.0.1)
-    Fss-lib (1.1.5)
+    Fss-lib (2.0)
       Fable.Core (>= 3.2.5) - restriction: >= netstandard2.0
       Fable.Elmish.React (>= 3.0.1) - restriction: >= netstandard2.0
       Fable.React (>= 7.3) - restriction: >= netstandard2.0

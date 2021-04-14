@@ -10,8 +10,8 @@ module App =
     open Fss
 
     // Colors
-    let blue = FssTypes.Color.hex "0d6efd"
-    let darkBlue = FssTypes.Color.hex "01398D"
+    let blue = hex "0d6efd"
+    let darkBlue = hex "01398D"
 
     // Font
     let textFont = FontFamily.custom "Roboto"
