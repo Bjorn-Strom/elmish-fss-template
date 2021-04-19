@@ -1,135 +1,133 @@
-﻿namespace Docs
+﻿// Copy of the reactjs.org todo list.
+module App
 
-// Copy of the reactjs.org todo list.
+open Elmish
+open Elmish.React
+open Fable.React
+open Fable.React.Props
+open Fss
 
-module App =
-    open Elmish
-    open Elmish.React
-    open Fable.React
-    open Fable.React.Props
-    open Fss
+// Colors
+let blue = hex "0d6efd"
+let darkBlue = hex "01398D"
 
-    // Colors
-    let blue = hex "0d6efd"
-    let darkBlue = hex "01398D"
-
-    // Font
-    let textFont = FontFamily.custom "Roboto"
-    let container =
-        fss
-            [
-                Display.flex
-                FlexDirection.column
-                Padding.value(rem 0., rem 1.5)
-                textFont
-            ]
-    let header = fss [ Color' blue ]
-    let todoStyle =
-        let fadeInAnimation =
-            keyframes
-                [
-                    frame 0
-                        [
-                            Opacity' 0.
-                            Transforms [ Transform.translateY <| px 20 ]
-                        ]
-                    frame 100
-                        [
-                            Opacity' 1.
-                            Transforms [ Transform.translateY <| px 0 ]
-                        ]
-                ]
-        let indexCounter = counterStyle []
-        fss
-            [
-                CounterIncrement' indexCounter
-                FontSize' (px 20)
-                AnimationName' fadeInAnimation
-                AnimationDuration' (sec 0.4)
-                AnimationTimingFunction.ease
-                ListStyleType.none
-                Before
-                    [
-                        Color.hex "48f"
-                        Content.counter(indexCounter,". ")
-                    ]
-            ]
-    let formStyle =
+// Font
+let textFont = FontFamily.custom "Roboto"
+let container =
+    fss
         [
-            Display.inlineBlock
-            Padding.value(px 10, px 15)
-            FontSize' (px 18);
-            BorderRadius' (px 0)
+            Display.flex
+            FlexDirection.column
+            Padding.value(rem 0., rem 1.5)
+            textFont
         ]
-    let buttonStyle =
-        fss
+let header = fss [ Color' blue ]
+let todoStyle =
+    let fadeInAnimation =
+        keyframes
             [
-                yield! formStyle
-                Border.none
-                BackgroundColor' blue
-                Color.white
-                Width' (em 10.)
-                Hover
+                frame 0
                     [
-                        Cursor.pointer
-                        BackgroundColor' darkBlue
+                        Opacity' 0.
+                        Transforms [ Transform.translateY <| px 20 ]
+                    ]
+                frame 100
+                    [
+                        Opacity' 1.
+                        Transforms [ Transform.translateY <| px 0 ]
                     ]
             ]
-    let inputStyle =
-        fss
-            [
-                yield! formStyle
-                BorderRadius' (px 0)
-                BorderWidth.thin
-                MarginRight' (px 25)
-                Width' (px 400)
-            ]
+    let indexCounter = counterStyle []
+    fss
+        [
+            CounterIncrement' indexCounter
+            FontSize' (px 20)
+            AnimationName' fadeInAnimation
+            AnimationDuration' (sec 0.4)
+            AnimationTimingFunction.ease
+            ListStyleType.none
+            Before
+                [
+                    Color.hex "48f"
+                    Content.counter(indexCounter,". ")
+                ]
+        ]
+let formStyle =
+    [
+        Display.inlineBlock
+        Padding.value(px 10, px 15)
+        FontSize' (px 18);
+        BorderRadius' (px 0)
+    ]
+let buttonStyle =
+    fss
+        [
+            yield! formStyle
+            Border.none
+            BackgroundColor' blue
+            Color.white
+            Width' (em 10.)
+            Hover
+                [
+                    Cursor.pointer
+                    BackgroundColor' darkBlue
+                ]
+        ]
+let inputStyle =
+    fss
+        [
+            yield! formStyle
+            BorderRadius' (px 0)
+            BorderWidth.thin
+            MarginRight' (px 25)
+            Width' (px 400)
+        ]
 
-    type Model = {
-        Input: string
-        Todos: string list
-    }
+type Model = {
+    Input: string
+    Todos: string list
+}
 
-    type Msg =
-        | SetInput of string
-        | AddTodo of string
+type Msg =
+    | SetInput of string
+    | AddTodo of string
 
-    let init() = {
-        Input = ""
-        Todos = []
-    }
+let init() = {
+    Input = ""
+    Todos = []
+}
 
-    let update (msg: Msg) (model: Model): Model =
-        match msg with
-        | SetInput input -> { model with Input = input }
-        | AddTodo todo ->
-            { model with
-                Todos = model.Todos @ [todo]
-                Input = "" }
+let update (msg: Msg) (model: Model): Model =
+    match msg with
+    | SetInput input -> { model with Input = input }
+    | AddTodo todo ->
+        { model with
+            Todos = model.Todos @ [todo]
+            Input = "" }
 
-    let render (model: Model) (dispatch: Msg -> unit) =
-        div [ ClassName container ]
-            [
-                h2 [ ClassName header ] [ str "TODO" ]
-                ul [] <| List.map (fun todo -> li [ ClassName todoStyle] [ str todo ]) model.Todos
-                div []
-                    [
-                        input
-                            [
-                                ClassName inputStyle
-                                Placeholder "What needs to be done?"
-                                Value model.Input
-                                OnChange (fun e -> e.Value |> SetInput |> dispatch)
-                            ]
-                        button
-                            [
-                                ClassName buttonStyle
-                                OnClick (fun _ -> model.Input |> AddTodo |> dispatch)
-                            ]
-                            [ str $"Add #{List.length model.Todos}" ]
-                    ]
-            ]
+let render (model: Model) (dispatch: Msg -> unit) =
+    div [ ClassName container ]
+        [
+            h2 [ ClassName header ] [ str "TODO" ]
+            ul [] <| List.map (fun todo -> li [ ClassName todoStyle] [ str todo ]) model.Todos
+            div []
+                [
+                    input
+                        [
+                            ClassName inputStyle
+                            Placeholder "What needs to be done?"
+                            Value model.Input
+                            OnChange (fun e -> e.Value |> SetInput |> dispatch)
+                        ]
+                    button
+                        [
+                            ClassName buttonStyle
+                            OnClick (fun _ -> model.Input |> AddTodo |> dispatch)
+                        ]
+                        [ str $"Add #{List.length model.Todos}" ]
+                ]
+        ]
 
-    Program.mkSimple init update render
-    |> Program.withReactSynchronous "elmish-app"
-    |> Program.run
+Program.mkSimple init update render
+|> Program.withReactSynchronous "elmish-app"
+|> Program.run
