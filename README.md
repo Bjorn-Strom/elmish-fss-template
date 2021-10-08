@@ -3,7 +3,7 @@
 A simple F# elmish template with:
 - F# 5
 - Fable 3
-- Paket
+- esbuild
 - Fss
 - Elmish
 
@@ -14,4 +14,4 @@ paket install
 npm install
 npm start
 ```
-Go to localhost:1234
+Go to localhost:8000
